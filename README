@@ -1,0 +1,86 @@
+PhosCalc 1.2 (Standalone Version) 
+Requirements: Perl, Math::Combinatorics Module 
+(http://search.cpan.org/~allenday/Math-Combinatorics- 
+0.08/lib/Math/Combinatorics.pm#AUTHOR) 
+
+About PhosCalc 
+PhosCalc is a system for estimating the site of phosphorylation in a 
+phosphorylated peptide with ambiguous sites. 
+It does this by generating ions from peptide sequences and calculating their 
+masses, generating different ions and masses for water-loss, different cysteine 
+modifications and different charge states. These are then compared with peaks 
+in the spectrum from which the peptide was identified to asess the most likely 
+site of p The process is carried out as described in MacLean et al 
+
+Feature additions over version 1: 
+-will now accept mgf file 
+-will add water-loss ions to predicted set 
+-will deal with different charge states 
+-allows selection of masses for different cysteine modifications 
+-asesses calculated probabilities of combinations of phosphorylation sites to 
+produce a best guess formatted string 
+
+Running PhosCalc: 
+Quick Start 
+
+Input 
+As a minimum PhosCalc requires a peptide spectrum list file and spectrum files to run. 
+The spectra may be either .dta or .mgf format. Default is .dta. 
+The peptide spectrum list must contain each peptide to be assessed and the 
+name of the corresponding spectrum. The info should be in two columns, the 
+peptide on the left and it's spectrum on the right, seperated by a tab character 
+
+eg THISISAPEPTIDE aspectrumfile.dta 
+
+If you like you can build the peptide list file in excel and save it as a 'tab delimited' file. 
+If you are using .dta files, the spectrum column should contain the name of the 
+.dta file, if you are using .mgf then the spectrum column should contain the 
+name of the specturm as given in the TITLE= line. 
+
+To run PhosCalc
+
+Using .dta files 
+Put the peptide spectrum list file and the .dta files in the same folder as the script. 
+From the command line simply type perl phoscalc1.2.pl -p <peptide spectrum list> 
+
+PhosCalc will run with 
+experiment type MS2 
+error margin of 0.4 
+filtering the four strongest peaks from each 100 m/z window of the spectrum 
+using a best guess range of 3 orders of magnitude (1000) 
+output will go into a file with the name of your peptide spectrum list appended with '_phoscalc_output.tab' 
+
+Using .mgf files 
+Put the spectrum list file and the .mgf file in the same folder as the script. 
+From the command line type phoscalc1.2.pl -p <peptide spectrum list> -t mgf -m  <mgf file name> 
+
+PhosCalc will run with 
+experiment type MS2 
+error margin of 0.4 
+filtering the four strongest peaks from each 100 m/z window of the spectrum 
+using a best guess range of 3 orders of magnitude (1000) 
+output will go into a file with the name of your peptide spectrum list appended with '_phoscalc_output.tab' 
+
+Other settings 
+You can customise the behaviour of PhosCalc using the command line flags. To see a summary of these type phoscalc1.2.pl -h at the command line. 
+-p <some file> defines the peptide spectrum list file 
+-t <'dta' or 'mgf'> defines the spectrum file type (defaults to dta if ommitted) 
+-m <some file> defines the .mgf file (required if -t is set) 
+-x defines the experiment type (defaults to MS2 if ommitted) 
+-e defines the width of window for peak matching. (defaults to 0.4 if 
+ommitted)
+-D calculate additional ions with loss of water 
+-M use carboxmethylated cysteine value (mutually exclusive with -A) 
+-A use carboxamidomethylated cysteine (mutually exclusive with -M) 
+unmodified cysteine mass = 103.00919 
+alkylated cysteine (carboxmethylation) = 103.00919 + 58.00548 
+alkylated cysteine (carboxamidomethylation) = 103.00919 + 57.021464 
+-o <some file> defines the output file (defaults to 
+input_file_phoscalc_output.tab if ommitted) 
+-b <a number> defines the range of p values over which to consider a phosphorylation site equivalent for best guess formatting. eg 10 = 1 order of magnitude, 1000 = 3 orders of magnitude, 1000000 = 6 orders of magnitude. (defaults to 1000 if ommitted). 
+-h print the help and quit 
+
+References 
+MacLean D, Burrell MA, Studholme DJ and Jones AMEJ (2008) PhosCalc: A tool for 
+determining the likelihood of peptide phosphorylation from Mass Spectrometer 
+data.BMC Research Notes .1:30 (PubMed)
