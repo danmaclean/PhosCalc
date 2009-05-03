@@ -1,7 +1,6 @@
 PhosCalc 1.2 (Standalone Version) 
 Requirements: Perl, Math::Combinatorics Module 
-(http://search.cpan.org/~allenday/Math-Combinatorics- 
-0.08/lib/Math/Combinatorics.pm#AUTHOR) 
+(http://search.cpan.org/~allenday/Math-Combinatorics-0.08/lib/Math/Combinatorics.pm#AUTHOR) 
 
 About PhosCalc 
 PhosCalc is a system for estimating the site of phosphorylation in a 
