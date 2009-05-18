@@ -15,7 +15,7 @@ use strict;
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
 #
 #
-#LAST EDITED: 23rd April 2009
+#LAST EDITED: 18th May 2009
 #
 use lib ".";
 use Math::Combinatorics;
@@ -33,7 +33,7 @@ use Data::Dumper;
 my %options=();
 getopts("p:x:e:o:h:t:m:MAb:D",\%options);
 
-my $vers = "1.2 (Nov 2008)";
+my $vers = "1.2.1 (May 2009)";
 my $usage = "\n\n-----PhosCalc $vers -----\nusage = $0 <options> \nFlags:\n -p <peptide spectrum list>\n -t <spectrum type [dta or mgf] (default = dta)>\n -m <mgf file>\n -x <exp type MS2 or MS3 (default = MS2)>\n -e <error margin (default = 0.4)>\n -D <use dehydration>\n -M <use alkylated cysteine (carboxmethylation) = cysteine (103.00919) + 58.00548>\n -A <use alkylated cysteine (carboxamidomethylation) = cysteine (103.00919) + 57.021464>\n -o <output_file>\n -b <best guess range (default = 1000)>\n -h Print this help message\n\n\n";
 
 
@@ -119,7 +119,7 @@ while ( my $line = <LISTFILE> )
 
 	}
 	
-
+	$tmp[0] =~ s/[\#@\*\^]//g;
 	my $seq_num = "$tmp[0]$number_of_phos_sites";
 
 	my $concat = "$seq_num:$tmp[1]";
